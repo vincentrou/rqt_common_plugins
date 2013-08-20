@@ -49,7 +49,7 @@ class MessageProxyModel(QSortFilterProxyModel):
 
         self._exclude_filters = FilterCollection(self)
         self._highlight_filters = FilterCollection(self)
-        self.setFilterRole(Qt.UserRole)
+        self.setFilterRole(Qt.DisplayRole)
         self.setSortRole(Qt.UserRole)
 
     # BEGIN Required implementations of QSortFilterProxyModel functions
@@ -61,7 +61,7 @@ class MessageProxyModel(QSortFilterProxyModel):
         """
         rowdata = []
         for index in range(self.sourceModel().columnCount()):
-            rowdata.append(self.sourceModel().index(sourcerow, index, sourceparent).data(Qt.UserRole))
+            rowdata.append(self.sourceModel().index(sourcerow, index, sourceparent).data(Qt.DisplayRole))
 
         if self._exclude_filters.test_message_array(rowdata):
             return False
