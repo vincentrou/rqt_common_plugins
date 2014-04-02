@@ -168,6 +168,8 @@ class Plot(Plugin):
         instance_settings.set_value('plot_type', self._plot_type_index)
         instance_settings.set_value('autoscroll', self._widget.autoscroll_checkbox.isChecked())
         instance_settings.set_value('topics', pack(self._widget._rosdata.keys()))
+        if self._plot_type_index == 0:
+            instance_settings.set_value('state', pack(self._widget.get_range()))
 
     def restore_settings(self, plugin_settings, instance_settings):
         self._widget.autoscroll_checkbox.setChecked(instance_settings.value('autoscroll', True) in [True, 'true'])
@@ -178,6 +180,8 @@ class Plot(Plugin):
             if topics:
                 for topic in topics:
                     self._widget.add_topic(topic)
+        if self._plot_type_index == 0:
+            self._widget.set_range(unpack(instance_settings.value('state', ([0, 1], [0, 1]))))
 
     def trigger_configuration(self):
         dialog = SimpleSettingsDialog(title='Plot Options')

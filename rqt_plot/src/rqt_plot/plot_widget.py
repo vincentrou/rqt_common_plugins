@@ -234,3 +234,9 @@ class PlotWidget(QWidget):
             self._update_plot_timer.start(self._redraw_interval)
         else:
             self._update_plot_timer.stop()
+
+    def get_range(self):
+        return self.data_plot.get_range()
+
+    def set_range(self, range):
+        return self.data_plot.set_range(range)

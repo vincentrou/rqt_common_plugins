@@ -104,3 +104,10 @@ class PyQtGraphDataPlot(QWidget):
 
             self._plot_widget.setXRange(x_max - x_delta, x_max, padding=0)
 
+    def get_range(self):
+        return self._plot_widget.viewRange()
+
+    def set_range(self, range):
+        x, y = range
+        self._plot_widget.setXRange(x[0], x[1], padding=0)
+        self._plot_widget.setYRange(y[0], y[1], padding=0)
